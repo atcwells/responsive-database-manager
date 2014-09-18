@@ -1,0 +1,59 @@
+{
+    "name": "role",
+    "fields": {
+        "name": {
+            "type": "string",
+            "visible": "true",
+            "mandatory": "true",
+            "read_only": "false",
+            "get": "string",
+            "set": "string",
+            "validate": "string"
+        },
+        "display_name": {
+            "type": "string",
+            "visible": "true",
+            "mandatory": "true",
+            "read_only": "false",
+            "get": "string",
+            "set": "string",
+            "validate": "string"
+        },
+        "_created_on": {
+            "type": "date",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "get": "date",
+            "default": "date"
+        },
+        "_created_by": {
+            "type": "objectid",
+            "ref": "user",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "get": "objectid",
+            "set": "objectid",
+            "validate": "objectid"
+        },
+        "_updated_on": {
+            "type": "date",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "get": "date",
+            "default": "date"
+        },
+        "_updated_by": {
+            "type": "objectid",
+            "ref": "user",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "get": "objectid",
+            "set": "objectid",
+            "validate": "objectid"
+        }
+    }
+}

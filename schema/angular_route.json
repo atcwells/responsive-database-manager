@@ -1,0 +1,89 @@
+{
+    "name": "angular_route",
+    "fields": {
+        "templateUrl": {
+            "display_name": "Template URL",
+            "description": "The url to go to in order to load the partial required by this route.",
+            "type": "string",
+            "read_only": "false",
+            "mandatory": "false",
+            "visible": "true",
+            "set": "string",
+            "validate": "string",
+            "get": "string"
+        },
+        "controller": {
+            "type": "string",
+            "read_only": "false",
+            "mandatory": "true",
+            "visible": "true",
+            "description": "The Angular controller used for this Route.",
+            "display_name": "Controller",
+            "set": "string",
+            "validate": "string",
+            "get": "string"
+        },
+        "name": {
+            "type": "string",
+            "visible": "true",
+            "mandatory": "true",
+            "read_only": "false",
+            "display_name": "Name",
+            "set": "string",
+            "validate": "string",
+            "get": "string"
+        },
+        "display_name": {
+            "type": "string",
+            "visible": "true",
+            "mandatory": "true",
+            "read_only": "false",
+            "description": "",
+            "display_name": "Display Name",
+            "set": "string",
+            "validate": "string",
+            "get": "string"
+        },
+        "_created_on": {
+            "type": "date",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "display_name": "Created On",
+            "default": "date",
+            "get": "date"
+        },
+        "_created_by": {
+            "type": "objectid",
+            "ref": "user",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "display_name": "Created By",
+            "set": "objectid",
+            "validate": "objectid",
+            "get": "objectid"
+        },
+        "_updated_on": {
+            "type": "date",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "description": "Updated Last",
+            "display_name": "Updated On",
+            "default": "date",
+            "get": "date"
+        },
+        "_updated_by": {
+            "type": "objectid",
+            "ref": "user",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "display_name": "Updated By",
+            "set": "objectid",
+            "validate": "objectid",
+            "get": "objectid"
+        }
+    }
+}

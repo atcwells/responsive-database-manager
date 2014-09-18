@@ -1,0 +1,78 @@
+{
+    "name": "menu_item",
+    "fields": {
+        "href": {
+            "type": "string",
+            "read_only": "false",
+            "mandatory": "false",
+            "visible": "true",
+            "set": "string",
+            "validate": "string",
+            "get": "string"
+        },
+        "name": {
+            "type": "string",
+            "visible": "true",
+            "mandatory": "true",
+            "read_only": "false",
+            "set": "string",
+            "validate": "string",
+            "get": "string"
+        },
+        "menu_group": {
+            "type": "objectid",
+            "visible": "true",
+            "mandatory": "false",
+            "read_only": "false",
+            "ref": "menu_group",
+            "set": "objectid",
+            "validate": "objectid",
+            "get": "objectid"
+        },
+        "display_name": {
+            "type": "string",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "false",
+            "set": "string",
+            "validate": "string",
+            "get": "string"
+        },
+        "_created_on": {
+            "type": "date",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "default": "date",
+            "get": "date"
+        },
+        "_created_by": {
+            "type": "objectid",
+            "ref": "user",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "set": "objectid",
+            "validate": "objectid",
+            "get": "objectid"
+        },
+        "_updated_on": {
+            "type": "date",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "default": "date",
+            "get": "date"
+        },
+        "_updated_by": {
+            "type": "objectid",
+            "ref": "user",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "set": "objectid",
+            "validate": "objectid",
+            "get": "objectid"
+        }
+    }
+}
