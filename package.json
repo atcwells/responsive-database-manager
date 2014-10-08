@@ -1,0 +1,24 @@
+{
+  "name": "responsive-database-manager",
+  "version": "0.6.0",
+  "description": "A database manager that responds to changes in schema, whilst the host application is still running.",
+  "main": "responsive-database-manager.js",
+  "dependencies": {
+    "lodash-node": "~2.4.1",
+    "mongoose": "3.8.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atcwells/responsive-database-manager.git"
+  },
+  "author": "Alex Wells",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atcwells/responsive-database-manager/issues"
+  },
+  "homepage": "https://github.com/atcwells/responsive-database-manager"
+}

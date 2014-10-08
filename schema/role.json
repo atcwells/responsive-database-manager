@@ -6,54 +6,44 @@
             "visible": "true",
             "mandatory": "true",
             "read_only": "false",
-            "get": "string",
-            "set": "string",
-            "validate": "string"
+            "display_name": "New field"
         },
         "display_name": {
             "type": "string",
             "visible": "true",
             "mandatory": "true",
             "read_only": "false",
-            "get": "string",
-            "set": "string",
-            "validate": "string"
+            "display_name": "New field"
         },
         "_created_on": {
-            "type": "date",
+            "type": "string",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "get": "date",
-            "default": "date"
+            "display_name": "New field"
         },
         "_created_by": {
-            "type": "objectid",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "get": "objectid",
-            "set": "objectid",
-            "validate": "objectid"
+            "display_name": "New field",
+            "type": "string"
         },
         "_updated_on": {
-            "type": "date",
+            "type": "string",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "get": "date",
-            "default": "date"
+            "display_name": "New field"
         },
         "_updated_by": {
-            "type": "objectid",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "get": "objectid",
-            "set": "objectid",
-            "validate": "objectid"
+            "display_name": "New field",
+            "type": "string"
         }
     }
 }

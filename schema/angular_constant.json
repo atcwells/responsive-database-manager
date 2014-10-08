@@ -6,80 +6,58 @@
             "visible": "true",
             "mandatory": "true",
             "read_only": "false",
-            "display_name": "Name",
-            "get": "string",
-            "set": "string",
-            "validate": "string"
+            "display_name": "Name"
         },
         "group": {
             "type": "string",
             "visible": "true",
             "mandatory": "true",
             "read_only": "false",
-            "display_name": "Group",
-            "get": "string",
-            "set": "string",
-            "validate": "string"
+            "display_name": "Group"
         },
         "value": {
             "type": "string",
             "visible": "true",
             "mandatory": "true",
             "read_only": "false",
-            "display_name": "Value",
-            "get": "string",
-            "set": "string",
-            "validate": "string"
+            "display_name": "Value"
         },
         "display_name": {
             "type": "string",
             "visible": "true",
             "mandatory": "true",
             "read_only": "false",
-            "display_name": "Display Name",
-            "get": "string",
-            "set": "string",
-            "validate": "string"
+            "display_name": "Display Name"
         },
         "_created_on": {
-            "type": "date",
+            "type": "string",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "display_name": "Created On",
-            "get": "date",
-            "default": "date"
+            "display_name": "Created On"
         },
         "_created_by": {
-            "type": "objectid",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
             "display_name": "Created By",
-            "get": "objectid",
-            "set": "objectid",
-            "validate": "objectid"
+            "type": "string"
         },
         "_updated_on": {
-            "type": "date",
+            "type": "string",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "display_name": "Updated Last",
-            "get": "date",
-            "default": "date"
+            "display_name": "Updated Last"
         },
         "_updated_by": {
-            "type": "objectid",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
             "display_name": "Updated By",
-            "get": "objectid",
-            "set": "objectid",
-            "validate": "objectid"
+            "type": "string"
         }
     }
 }

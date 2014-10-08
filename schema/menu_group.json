@@ -6,9 +6,6 @@
             "visible": "true",
             "mandatory": "true",
             "read_only": "false",
-            "set": "string",
-            "validate": "string",
-            "get": "string",
             "display_name": "Name"
         },
         "display_name": {
@@ -16,60 +13,45 @@
             "visible": "true",
             "mandatory": "true",
             "read_only": "false",
-            "set": "string",
-            "validate": "string",
-            "get": "string",
             "display_name": "Display Name"
         },
         "_created_on": {
-            "type": "date",
+            "type": "string",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "default": "date",
-            "get": "date",
             "display_name": "Created On"
         },
         "_updated_on": {
-            "type": "date",
+            "type": "string",
             "visible": "true",
             "mandatory": "true",
             "read_only": "true",
-            "default": "date",
-            "get": "date",
             "display_name": "Updated On"
         },
         "_updated_by": {
-            "type": "objectid",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "set": "objectid",
-            "validate": "objectid",
-            "get": "objectid",
-            "display_name": "Updated By"
+            "display_name": "Updated By",
+            "type": "string"
         },
         "menu_context": {
-            "type": "objectid",
             "ref": "menu_context",
             "visible": "true",
             "read_only": "false",
             "mandatory": "false",
-            "set": "objectid",
-            "validate": "objectid",
-            "get": "objectid",
-            "display_name": "Menu Context"
+            "display_name": "Menu Context",
+            "type": "string"
         },
         "_created_by": {
-            "type": "objectid",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "get": "objectid",
-            "set": "objectid",
-            "validate": "objectid"
+            "display_name": "New field",
+            "type": "string"
         }
     }
 }
