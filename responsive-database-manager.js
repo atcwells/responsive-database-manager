@@ -28,6 +28,14 @@ function database_manager(optionsObj, callback) {
 /*
 	Schema functions
 */
+database_manager.prototype.getSchemaNames = function(callback) {
+  var names = [];
+  for(var key in this.controller.schemas){
+    names.push(key);
+  }
+  callback(null, names)
+};
+
 database_manager.prototype.setupSchema = function(schemaName, schemaFields, callback) {
 	this.controller.addSchema(schemaName, schemaFields, callback);
 };
@@ -38,6 +46,10 @@ database_manager.prototype.removeSchema = function(schemaName, callback) {
 
 database_manager.prototype.changeSchema = function(schemaName, schemaFields, callback) {
 	this.controller.changeSchema(schemaName, schemaFields, callback);
+};
+
+database_manager.prototype.getSchemaDefinition = function(schemaName, callback) {
+  callback(null, this.controller.schemaDefinitions[schemaName]);
 };
 
 database_manager.prototype.schema = function(schemaName) {

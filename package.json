@@ -1,6 +1,6 @@
 {
   "name": "responsive-database-manager",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A database manager that responds to changes in schema, whilst the host application is still running.",
   "main": "responsive-database-manager.js",
   "dependencies": {
