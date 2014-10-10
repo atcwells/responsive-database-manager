@@ -5,7 +5,8 @@ var m = RDM({
   schemaDirectory: '/schema',
   useMongooseFixes: true,
   backupRecords: true,
-  backupDirectory: '/backups'
+  backupDirectory: '/backups',
+  wipeSchemas: true
 }, function() {
   m.schema('test').find({}, function(err, data) {
     // console.log(data);
@@ -30,4 +31,39 @@ var m = RDM({
   m.getFieldType('web_address', function(err, data) {
     // console.log('fieldType')
   });
+
+  m.removeSchema('test2', function(err, msg) {
+    console.log(err, msg);
+    m.addSchema('test4', {
+        "username": {
+            "type": "string",
+            "read_only": "false",
+            "mandatory": "true",
+            "visible": "true",
+            "display_name": "Username",
+            "subtype": "string"
+        },
+        "name": {
+            "type": "string",
+            "read_only": "false",
+            "mandatory": "false",
+            "visible": "true",
+            "display_name": "Name",
+            "subtype": "string"
+        },
+        "email": {
+            "type": "string",
+            "read_only": "false",
+            "mandatory": "false",
+            "visible": "true",
+            "display_name": "Email",
+            "validate": [
+                null
+            ],
+            "subtype": "string"
+        }
+      }, function(err, msg) {
+          console.log(err, msg);
+        })
+  })
 });

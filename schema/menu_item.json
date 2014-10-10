@@ -16,12 +16,12 @@
             "display_name": "New field"
         },
         "menu_group": {
+            "type": "string",
             "visible": "true",
             "mandatory": "false",
             "read_only": "false",
             "ref": "menu_group",
-            "display_name": "New field",
-            "type": "string"
+            "display_name": "New field"
         },
         "display_name": {
             "type": "string",
@@ -38,12 +38,12 @@
             "display_name": "New field"
         },
         "_created_by": {
+            "type": "string",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "display_name": "New field",
-            "type": "string"
+            "display_name": "New field"
         },
         "_updated_on": {
             "type": "string",
@@ -53,12 +53,12 @@
             "display_name": "New field"
         },
         "_updated_by": {
+            "type": "string",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "display_name": "New field",
-            "type": "string"
+            "display_name": "New field"
         }
     }
 }

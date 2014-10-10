@@ -22,7 +22,14 @@ function database_manager(optionsObj, callback) {
 	};
 
 	var self = this;
-	self.controller = require('./mongodb/mongooseController.js')(self.options, callback);
+
+  self.controller = require('./mongodb/mongooseController.js')(self.options, function(err, msg) {
+    if(self.options.wipeSchemas) {
+      self._wipeSchemas(callback);
+    } else {
+      callback(err, msg);
+    }
+  });
 };
 
 /*
@@ -36,12 +43,12 @@ database_manager.prototype.getSchemaNames = function(callback) {
   callback(null, names)
 };
 
-database_manager.prototype.setupSchema = function(schemaName, schemaFields, callback) {
+database_manager.prototype.addSchema = function(schemaName, schemaFields, callback) {
 	this.controller.addSchema(schemaName, schemaFields, callback);
 };
 
 database_manager.prototype.removeSchema = function(schemaName, callback) {
-	this.controller.removeSchema(schemaName, schemaFields, callback);
+	this.controller.removeSchema(schemaName, callback);
 };
 
 database_manager.prototype.changeSchema = function(schemaName, schemaFields, callback) {
@@ -68,6 +75,12 @@ database_manager.prototype.schema = function(schemaName) {
 		return this.controller.schemas[schemaName];
 	}
 };
+
+database_manager.prototype._wipeSchemas = function(callback) {
+console.log('test');
+
+  callback(null, "");
+}
 
 /*
 	Field Type functions

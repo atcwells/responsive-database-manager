@@ -58,7 +58,8 @@
             "mandatory": "false",
             "visible": "true",
             "display_name": "Updated By",
-            "subtype": "objectid"
+            "subtype": "objectid",
+            "type": "objectid"
         },
         "_created_by": {
             "ref": "user",
@@ -66,7 +67,8 @@
             "mandatory": "false",
             "read_only": "true",
             "display_name": "Created By",
-            "subtype": "objectid"
+            "subtype": "objectid",
+            "type": "objectid"
         },
         "password": {
             "type": "string",
@@ -83,7 +85,8 @@
             "visible": "true",
             "read_only": "false",
             "mandatory": "false",
-            "subtype": "objectid"
+            "subtype": "objectid",
+            "type": "objectid"
         }
     }
 }

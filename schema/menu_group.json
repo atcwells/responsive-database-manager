@@ -30,28 +30,28 @@
             "display_name": "Updated On"
         },
         "_updated_by": {
+            "type": "string",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "display_name": "Updated By",
-            "type": "string"
+            "display_name": "Updated By"
         },
         "menu_context": {
+            "type": "string",
             "ref": "menu_context",
             "visible": "true",
             "read_only": "false",
             "mandatory": "false",
-            "display_name": "Menu Context",
-            "type": "string"
+            "display_name": "Menu Context"
         },
         "_created_by": {
+            "type": "string",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "display_name": "New field",
-            "type": "string"
+            "display_name": "New field"
         }
     }
 }

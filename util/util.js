@@ -24,4 +24,8 @@ module.exports.writeJsonSchema = function(path, schemaName, schemaDefinition, ca
       callback(null, "Schema written to file successfully");
     }
   })
-}
+};
+
+module.exports.removeJsonSchema = function(path, schemaName, callback) {
+  fs.unlink(path + schemaName + '.json', callback)
+};

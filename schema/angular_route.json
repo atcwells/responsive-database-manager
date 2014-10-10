@@ -40,12 +40,12 @@
             "display_name": "Created On"
         },
         "_created_by": {
+            "type": "string",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "display_name": "Created By",
-            "type": "string"
+            "display_name": "Created By"
         },
         "_updated_on": {
             "type": "string",
@@ -56,12 +56,12 @@
             "display_name": "Updated On"
         },
         "_updated_by": {
+            "type": "string",
             "ref": "user",
             "visible": "false",
             "mandatory": "true",
             "read_only": "true",
-            "display_name": "Updated By",
-            "type": "string"
+            "display_name": "Updated By"
         }
     }
 }

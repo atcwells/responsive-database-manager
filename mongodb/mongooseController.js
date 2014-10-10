@@ -1,5 +1,6 @@
 var fs = require('fs');
 var util = require('../util/util.js');
+var _ = require('lodash-node');
 
 module.exports = init = function(options, callback) {
   return new mongooseController(options, callback);
@@ -104,11 +105,27 @@ mongooseController.prototype.invalidateRelevantSchemas = function(contractName, 
   }
 };
 
+mongooseController.prototype.addSchema = function(schemaName, schemaFields, callback) {
+  if(this.schemaDefinitions[schemaName]) {
+    callback(true, "schema with name [" + schemaName + "] already exists, cannot continue");
+  } else {
+    this.setupSchema(schemaName, schemaFields, callback);
+  }
+};
+
 mongooseController.prototype.removeSchema = function(schemaName, callback) {
   var self = this;
-  if(self.mongoose.connection && self.mongoose.connection.models[schemaName]) {
-    delete self.mongoose.connection.models[schemaName];
-    callback(null, "Schema [" + schemaName + '] removed successfully');
+  if(self.mongoose.connection && self.mongoose.connection.base.models[schemaName]) {
+    delete self.mongoose.connection.base.models[schemaName];
+    delete self.mongoose.connection.base.modelSchemas[schemaName];
+    util.removeJsonSchema(process.env.PWD + self.options.schemaDirectory + '/', schemaName, function(err, msg) {
+      if(err) {
+        callback(err, msg);
+      } else {
+        callback(null, "Schema [" + schemaName + '] removed successfully');
+      }
+    })
+
   } else {
     callback(true, 'Schema [' + schemaName + '] does not exist so cannot remove');
   }
@@ -145,7 +162,6 @@ mongooseController.prototype.setupSchema = function(schemaName, schemaFields, ca
 
   } else {
     this.logger.info('Schema called ' + schemaName + ' is valid, configuring for use.');
-    schemaFields = this._sanitizeFieldTypesForMongooseSync(schemaFields);
     for (var key in schemaFields) {
       schemaFields[key] = this.contracts.defaults.applyDefaultsSync(key, schemaFields[key]);
       schemaFields[key] = this.contracts.getters.applyGettersSync(key, schemaFields[key]);
@@ -154,10 +170,11 @@ mongooseController.prototype.setupSchema = function(schemaName, schemaFields, ca
     }
     self.schemaDefinitions[schemaName] = schemaFields;
     var schemaPath = process.env.PWD + this.options.schemaDirectory + '/' + schemaName + '.json';
-    util.writeJsonSchema(schemaPath, schemaName, this.schemaDefinitions[schemaName], function(err, msg) {
+    util.writeJsonSchema(schemaPath, schemaName, self.schemaDefinitions[schemaName], function(err, msg) {
       if(err) {
         callback(null, msg);
       } else {
+        schemaFields = self._sanitizeFieldTypesForMongooseSync(schemaFields);
         self._createSchema(schemaName, schemaFields, function(err, schema) {
           if(err) {
             callback(null, 'Schema called ' + schemaName + ' could not be configured.');
