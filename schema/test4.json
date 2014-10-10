@@ -1,0 +1,69 @@
+{
+    "name": "test4",
+    "fields": {
+        "username": {
+            "type": "string",
+            "read_only": "false",
+            "mandatory": "true",
+            "visible": "true",
+            "display_name": "Username",
+            "subtype": "string"
+        },
+        "name": {
+            "type": "string",
+            "read_only": "false",
+            "mandatory": "false",
+            "visible": "true",
+            "display_name": "Name",
+            "subtype": "string"
+        },
+        "email": {
+            "type": "string",
+            "read_only": "false",
+            "mandatory": "false",
+            "visible": "true",
+            "display_name": "Email",
+            "validate": [
+                null
+            ],
+            "subtype": "string"
+        },
+        "display_name": {
+            "type": "string",
+            "visible": "true",
+            "mandatory": "true",
+            "read_only": "false",
+            "display_name": "New field"
+        },
+        "_created_on": {
+            "type": "date",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "display_name": "New field"
+        },
+        "_created_by": {
+            "type": "objectid",
+            "ref": "user",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "display_name": "New field"
+        },
+        "_updated_on": {
+            "type": "date",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "display_name": "New field"
+        },
+        "_updated_by": {
+            "type": "objectid",
+            "ref": "user",
+            "visible": "false",
+            "mandatory": "true",
+            "read_only": "true",
+            "display_name": "New field"
+        }
+    }
+}
