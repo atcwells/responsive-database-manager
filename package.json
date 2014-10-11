@@ -1,11 +1,12 @@
 {
   "name": "responsive-database-manager",
-  "version": "0.6.1",
+  "version": "0.6.5",
   "description": "A database manager that responds to changes in schema, whilst the host application is still running.",
   "main": "responsive-database-manager.js",
   "dependencies": {
     "lodash-node": "~2.4.1",
-    "mongoose": "3.8.2"
+    "mongoose": "3.8.2",
+    "shelljs": "^0.3.0"
   },
   "devDependencies": {},
   "scripts": {

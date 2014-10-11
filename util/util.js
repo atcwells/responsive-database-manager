@@ -1,7 +1,8 @@
 var fs = require('fs');
+var shell = require('shelljs');
 
 module.exports.readJsonFile = function(fileLocation, callback) {
-  fs.readFile(process.env.PWD + fileLocation, 'UTF8', function(err, fileContents) {
+  fs.readFile(shell.pwd() + fileLocation, 'UTF8', function(err, fileContents) {
     if(err){
       callback(true, err);
     }else{

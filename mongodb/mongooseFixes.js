@@ -2,6 +2,7 @@
 
   var _ = require('lodash-node');
   var fs = require('fs');
+  var shell = require('shelljs');
 
     var mongooseFixes = function(schema, options) {
       this.options = options;
@@ -165,7 +166,7 @@
     };
 
     var _writeToFile = function(backupDirectory, schemaName, document) {
-      var path = process.env.PWD + backupDirectory + '/db_' + schemaName + '_' + document._id + '.json';
+      var path = shell.pwd() + backupDirectory + '/db_' + schemaName + '_' + document._id + '.json';
       var jsonPrettified = JSON.stringify(document, null, 4);
       fs.writeFile(path, document, function(err, msg) {
         if(err) {
@@ -177,7 +178,7 @@
     };
 
     var _deleteFile = function(backupDirectory, schemaName, documentID) {
-      var path = process.env.PWD + backupDirectory + '/db_' + schemaName + '_' + documentID + '.json';
+      var path = shell.pwd() + backupDirectory + '/db_' + schemaName + '_' + documentID + '.json';
       fs.unlink(path, function(err, msg) {
         console.log(err, msg);
       })

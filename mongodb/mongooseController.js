@@ -1,6 +1,7 @@
 var fs = require('fs');
 var util = require('../util/util.js');
 var _ = require('lodash-node');
+var shell = require('shelljs');
 
 module.exports = init = function(options, callback) {
   return new mongooseController(options, callback);
@@ -50,7 +51,7 @@ mongooseController.prototype.setup = function(callback) {
 
 mongooseController.prototype.readSchemaDirectory = function(callback) {
   var self = this;
-  var basePath = process.env.PWD + this.options.schemaDirectory + '/';
+  var basePath = shell.pwd() + this.options.schemaDirectory + '/';
   fs.readdir(basePath, function(err, files) {
     if(err) {
       callback(true, "Unable to read schema directory: " + basePath)
@@ -118,7 +119,7 @@ mongooseController.prototype.removeSchema = function(schemaName, callback) {
   if(self.mongoose.connection && self.mongoose.connection.base.models[schemaName]) {
     delete self.mongoose.connection.base.models[schemaName];
     delete self.mongoose.connection.base.modelSchemas[schemaName];
-    util.removeJsonSchema(process.env.PWD + self.options.schemaDirectory + '/', schemaName, function(err, msg) {
+    util.removeJsonSchema(shell.pwd() + self.options.schemaDirectory + '/', schemaName, function(err, msg) {
       if(err) {
         callback(err, msg);
       } else {
@@ -169,7 +170,7 @@ mongooseController.prototype.setupSchema = function(schemaName, schemaFields, ca
       schemaFields[key] = this.contracts.validators.applyValidatorsSync(key, schemaFields[key]);
     }
     self.schemaDefinitions[schemaName] = schemaFields;
-    var schemaPath = process.env.PWD + this.options.schemaDirectory + '/' + schemaName + '.json';
+    var schemaPath = shell.pwd() + this.options.schemaDirectory + '/' + schemaName + '.json';
     util.writeJsonSchema(schemaPath, schemaName, self.schemaDefinitions[schemaName], function(err, msg) {
       if(err) {
         callback(null, msg);
