@@ -1,0 +1,12 @@
+{
+    "table": "test",
+    "data": {
+        "__v": 0,
+        "_updated_on": "2014-10-13T08:22:36.325Z",
+        "_updated_by": null,
+        "_created_by": null,
+        "_created_on": "2014-10-13T08:22:36.324Z",
+        "_id": "543b8bcc59307e6f15797489",
+        "email": "d@a.com"
+    }
+}

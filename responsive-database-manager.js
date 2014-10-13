@@ -25,7 +25,7 @@ function database_manager(optionsObj, callback) {
 
   self.controller = require('./mongodb/mongooseController.js')(self.options, function(err, msg) {
     if(self.options.wipeSchemas) {
-      self._wipeSchemas(callback);
+      self.controller.coldRestore(callback);
     } else {
       callback(err, msg);
     }
@@ -75,12 +75,6 @@ database_manager.prototype.schema = function(schemaName) {
 		return this.controller.schemas[schemaName];
 	}
 };
-
-database_manager.prototype._wipeSchemas = function(callback) {
-console.log('test');
-
-  callback(null, "");
-}
 
 /*
 	Field Type functions

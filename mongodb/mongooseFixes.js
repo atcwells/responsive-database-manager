@@ -48,6 +48,7 @@
         var newData = _convertObjectsToIds(data);
         newData._updated_by = userId || null;
         newData._created_by = userId || null;
+        newData._created_on = new Date();
         if(newData.password){
         	delete newData.password;
         }
@@ -61,13 +62,7 @@
             	}
               self.find({
                   _id : data._id
-              }, function(err, data) {
-                  if (err) {
-                      callback(true, 'ERROR: Unable to create record on table ' + self.schema.modelName);
-                  } else {
-                      callback(null, data);
-                  }
-              });
+              }, callback);
             }
         });
     };
@@ -75,37 +70,39 @@
     mongooseFixes.prototype.updateRecords = function(userId, queryFields, updateFields, callback) {
       var self = this;
       for (var key in updateFields) {
-          if (_.isObject(updateFields[key]) && updateFields[key]._id == null) {
-              updateFields[key] = '';
-          } else if (_.isObject(updateFields[key]) && updateFields[key]._id != undefined) {
-              updateFields[key] = updateFields[key]._id;
-          }
+        if (_.isObject(updateFields[key]) && updateFields[key]._id == null) {
+          updateFields[key] = '';
+        } else if (_.isObject(updateFields[key]) && updateFields[key]._id != undefined) {
+          updateFields[key] = updateFields[key]._id;
+        }
       }
       this.schema.find(queryFields, function(err, records) {
           if (err) {
             callback(true, 'ERROR: Unable to save record with id:' + queryFields._id);
           } else {
-              records.forEach(function(record) {
-                  _.each(updateFields, function(field, fieldName) {
-                      record[fieldName] = field;
-                  });
-                  record._updated_by = userId;
-                  if (record.password) {
-                      delete record.password;
-                  }
-                  record.save(function(error, result) {
-                      if (error) {
-                          callback(true, 'ERROR: Unable to save record with id:' + queryFields._id);
-                      } else {
-                        if(self.options.backupRecords){
-                          _writeToFile(self.options.backupDirectory, self.schema.modelName, result);
-                        }
-                        self.find({
-                          _id : result._id
-                        }, callback);
-                      }
-                  });
+            var recordsToUpdate = records.length
+            records.forEach(function(record) {
+              _.each(updateFields, function(field, fieldName) {
+                record[fieldName] = field;
               });
+              record._updated_by = userId;
+              if (record.password) {
+                delete record.password;
+              }
+              record.save(function(error, result) {
+                if (error) {
+                    callback(true, 'ERROR: Unable to save record with id:' + queryFields._id);
+                } else {
+                  if(self.options.backupRecords){
+                    _writeToFile(self.options.backupDirectory, self.schema.modelName, result);
+                  }
+                  recordsToUpdate--;
+                  if(!recordsToUpdate) {
+                    self.find(queryFields, callback);
+                  }
+                }
+              });
+            });
           }
       });
     };
@@ -166,19 +163,23 @@
     };
 
     var _writeToFile = function(backupDirectory, schemaName, document) {
-      var path = shell.pwd() + backupDirectory + '/db_' + schemaName + '_' + document._id + '.json';
-      var jsonPrettified = JSON.stringify(document, null, 4);
-      fs.writeFile(path, document, function(err, msg) {
+      var path = shell.pwd() + backupDirectory + '/db_record.' + schemaName + '.' + document._id + '.json';
+      var jsonData = {
+        table: schemaName,
+        data: document
+      }
+      var jsonPrettified = JSON.stringify(jsonData, null, 4);
+      fs.writeFile(path, jsonPrettified, function(err, msg) {
         if(err) {
           console.log(err, msg);
         } else {
-          console.log(null, "Schema written to file successfully");
+          console.log(null, "Record written to file successfully");
         }
       })
     };
 
     var _deleteFile = function(backupDirectory, schemaName, documentID) {
-      var path = shell.pwd() + backupDirectory + '/db_' + schemaName + '_' + documentID + '.json';
+      var path = shell.pwd() + backupDirectory + '/db_record.' + schemaName + '.' + documentID + '.json';
       fs.unlink(path, function(err, msg) {
         console.log(err, msg);
       })

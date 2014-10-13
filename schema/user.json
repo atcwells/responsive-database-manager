@@ -47,20 +47,20 @@
             "display_name": "Updated Last"
         },
         "_updated_by": {
+            "type": "string",
             "ref": "user",
             "read_only": "true",
             "mandatory": "false",
             "visible": "true",
-            "display_name": "Updated By",
-            "type": "string"
+            "display_name": "Updated By"
         },
         "_created_by": {
+            "type": "string",
             "ref": "user",
             "visible": "false",
             "mandatory": "false",
             "read_only": "true",
-            "display_name": "Created By",
-            "type": "string"
+            "display_name": "Created By"
         },
         "password": {
             "type": "string",
@@ -70,13 +70,13 @@
             "display_name": "Password"
         },
         "role": {
+            "type": "string",
             "ref": "role",
             "description": "",
             "display_name": "Role",
             "visible": "true",
             "read_only": "false",
-            "mandatory": "false",
-            "type": "string"
+            "mandatory": "false"
         }
     }
 }

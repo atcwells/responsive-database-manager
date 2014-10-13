@@ -46,8 +46,38 @@ mongooseController.prototype.setup = function(callback) {
   this.mongoose = require('mongoose');
   this.mongoose.connect(this.options.mongoUrl);
   this.logger.info('MongoDB & Mongoose configuration complete.');
-  callback(null, 'MongoDB & Mongoose configuration complete.')
-}
+  callback(null, 'MongoDB & Mongoose configuration complete.');
+};
+
+mongooseController.prototype.coldRestore = function(callback) {
+  var self = this;
+  var schemasToRestore = this._getObjectSizeSync(this.schemas);
+  for(var schemaName in this.schemas) {
+    this.schemas[schemaName].remove({}, function(err, msg) {
+      schemasToRestore--;
+      if(!schemasToRestore) {
+        fs.readdir(shell.pwd() + self.options.backupDirectory, function(err, files) {
+          var filesToRead = files.length;
+          for (var fileKey in files) {
+            util.readJsonFile(self.options.backupDirectory + '/' + files[fileKey], function(err, fileContents) {
+              var newRecord = new self.schemas[fileContents.table](fileContents.data);
+              newRecord.save(function(err, data) {
+                  if (err) {
+                      callback(true, 'ERROR: Unable to create record on table ' + self.schema.modelName);
+                  } else {
+                    filesToRead--;
+                    if(!filesToRead) {
+                      callback(null, 'All files loaded properly, coldboot complete');
+                    }
+                  }
+              });
+            });
+          }
+        });
+      }
+    });
+  }
+};
 
 mongooseController.prototype.readSchemaDirectory = function(callback) {
   var self = this;
@@ -228,6 +258,14 @@ mongooseController.prototype._sanitizeFieldTypesForMongooseSync = function(schem
   };
   return fields;
 };
+
+mongooseController.prototype._getObjectSizeSync = function(obj) {
+  var size = 0, key;
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) size++;
+  }
+  return size;
+}
 
 mongooseController.prototype._createSchema = function(schemaName, schemaFields, callback) {
   this.logger.info('Creating schema called ' + schemaName);
