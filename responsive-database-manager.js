@@ -1,13 +1,5 @@
 var _ = require('lodash-node');
 
-Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-};
-
 module.exports = init = function(options, callback) {
 	return new database_manager(options, callback);
 }
