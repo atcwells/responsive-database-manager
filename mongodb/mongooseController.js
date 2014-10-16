@@ -29,6 +29,8 @@ mongooseController = function(options, callback) {
       setters : require('./contracts/mongooseSetters.js')(this.options)
   };
 
+  self.mongoose = this.options.mongoose || undefined;
+
   self.setup(function(err, msg) {
     if(err) {
       callback(err, msg);
@@ -39,14 +41,19 @@ mongooseController = function(options, callback) {
 };
 
 mongooseController.prototype.setup = function(callback) {
-  if(!this.options.mongoUrl)
-    throw('Cannot connect to MongoDB, no URL specified.');
+  if(this.mongoose) {
+    callback(null, 'Mongoose configuration supplied, no need to re-initialize');
+  } else {
 
-  this.logger.info('Configuring MongoDB & Mongoose at ' + this.options.mongoUrl + ' ...');
-  this.mongoose = require('mongoose');
-  this.mongoose.connect(this.options.mongoUrl);
-  this.logger.info('MongoDB & Mongoose configuration complete.');
-  callback(null, 'MongoDB & Mongoose configuration complete.');
+    if(!this.options.mongoUrl)
+      throw('Cannot connect to MongoDB, no URL specified.');
+
+    this.logger.info('Configuring MongoDB & Mongoose at ' + this.options.mongoUrl + ' ...');
+    this.mongoose = require('mongoose');
+    this.mongoose.connect(this.options.mongoUrl);
+    this.logger.info('MongoDB & Mongoose configuration complete.');
+    callback(null, 'MongoDB & Mongoose configuration complete.');
+  }
 };
 
 mongooseController.prototype.coldRestore = function(callback) {
